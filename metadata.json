@@ -1,0 +1,6 @@
+{
+  "name": "Nigeria 2027 Election Sentiment & Prediction Dashboard",
+  "description": "Real-time multi-platform social media sentiment intelligence, scientific vs online polling divergence, urban-rural geopolitical tracker, and 2027 electoral forecasting.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
