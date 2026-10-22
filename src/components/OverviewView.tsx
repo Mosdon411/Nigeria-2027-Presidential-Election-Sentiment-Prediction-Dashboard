@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { CANDIDATES, GEOPOLITICAL_ZONES, ECONOMIC_ISSUES, HERO_BANNER_URL } from '../data/electionData';
 import { Candidate, CandidateId } from '../types/election';
-import { ArrowUpRight, ArrowDownRight, Fuel, MapPin, Users, Activity, ExternalLink, BarChart3, Radio, Sparkles } from 'lucide-react';
+import { ArrowUpRight, ArrowDownRight, Fuel, MapPin, Users, Activity, ExternalLink, BarChart3, Radio, Sparkles, Sliders } from 'lucide-react';
 
 interface OverviewViewProps {
   onSelectCandidate: (candidateId: CandidateId) => void;
@@ -83,9 +83,18 @@ export const OverviewView: React.FC<OverviewViewProps> = ({
             </p>
           </div>
 
-          <div className="flex items-center gap-1.5 text-xs font-mono text-slate-500 bg-slate-50 px-3 py-1.5 rounded-lg border border-slate-200 self-start sm:self-auto">
-            <span className="w-2 h-2 rounded-full bg-emerald-600"></span>
-            <span>Click card for detailed dossier</span>
+          <div className="flex items-center gap-2 self-start sm:self-auto">
+            <button
+              onClick={() => onNavigateTab('forecaster')}
+              className="px-3 py-1.5 text-xs font-bold text-white bg-emerald-600 hover:bg-emerald-700 rounded-lg flex items-center gap-1.5 font-mono shadow-xs transition-colors"
+            >
+              <Sliders className="w-3.5 h-3.5" />
+              <span>Simulate Race</span>
+            </button>
+            <div className="hidden sm:flex items-center gap-1.5 text-xs font-mono text-slate-500 bg-slate-50 px-3 py-1.5 rounded-lg border border-slate-200">
+              <span className="w-2 h-2 rounded-full bg-emerald-600"></span>
+              <span>Click card for dossier</span>
+            </div>
           </div>
         </div>
 

@@ -10,6 +10,7 @@ import { ForecasterView } from './components/ForecasterView';
 import { AddPostModal } from './components/AddPostModal';
 import { BriefingModal } from './components/BriefingModal';
 import { CandidateModal } from './components/CandidateModal';
+import { SimulateRaceModal } from './components/SimulateRaceModal';
 import { CandidateId, SocialPost } from './types/election';
 
 export default function App() {
@@ -20,8 +21,7 @@ export default function App() {
   const [selectedCandidateId, setSelectedCandidateId] = useState<CandidateId | null>(null);
 
   const handleOpenSimulate = () => {
-    setActiveTab('forecaster');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    setIsSimulateModalOpen(true);
   };
 
   const handleSelectCandidate = (candidateId: CandidateId) => {
@@ -102,6 +102,16 @@ export default function App() {
       <CandidateModal
         candidateId={selectedCandidateId}
         onClose={() => setSelectedCandidateId(null)}
+      />
+
+      <SimulateRaceModal
+        isOpen={isSimulateModalOpen}
+        onClose={() => setIsSimulateModalOpen(false)}
+        onOpenFullStudio={() => {
+          setIsSimulateModalOpen(false);
+          setActiveTab('forecaster');
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }}
       />
     </div>
   );
