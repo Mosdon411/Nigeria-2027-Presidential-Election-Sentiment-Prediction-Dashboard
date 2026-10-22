@@ -61,13 +61,27 @@ export const GeopoliticalZonesView: React.FC = () => {
               <div className="text-xs font-semibold text-slate-800 mt-1 truncate">
                 {zone.name}
               </div>
-              <div className="mt-2 text-xs font-mono">
-                <div className="text-[10px] text-slate-500">Projected Lead</div>
-                <div className={`font-semibold ${leaderColor}`}>{leaderName}</div>
+              <div className="mt-2.5 flex items-center gap-2 text-xs font-mono">
+                {(() => {
+                  const leadCand = CANDIDATES.find(c => c.id === zone.sbmLeader);
+                  return leadCand ? (
+                    <img
+                      src={leadCand.imageUrl}
+                      alt={leadCand.name}
+                      referrerPolicy="no-referrer"
+                      className="w-6 h-6 rounded-full object-cover object-top border shadow-2xs shrink-0"
+                      style={{ borderColor: leadCand.color }}
+                    />
+                  ) : null;
+                })()}
+                <div className="min-w-0">
+                  <div className="text-[10px] text-slate-500 leading-tight">Projected Lead</div>
+                  <div className={`font-bold truncate text-[11px] ${leaderColor}`}>{leaderName}</div>
+                </div>
               </div>
-              <div className="mt-2 pt-2 border-t border-slate-100 text-[10px] text-slate-500 flex justify-between font-mono">
+              <div className="mt-2.5 pt-2 border-t border-slate-100 text-[10px] text-slate-500 flex justify-between font-mono">
                 <span>{zone.registeredVotersEstMillion}M Voters</span>
-                <span className="text-slate-600 font-semibold">+{zone.sbmMargin}%</span>
+                <span className="text-slate-700 font-bold">+{zone.sbmMargin}%</span>
               </div>
             </button>
           );
@@ -135,10 +149,21 @@ export const GeopoliticalZonesView: React.FC = () => {
 
           <div className="grid md:grid-cols-3 gap-4">
             {/* Peter Obi */}
-            <div className="p-4 bg-slate-50 border border-slate-200 rounded-lg space-y-2">
+            <div className="p-4 bg-slate-50 border border-slate-200 rounded-xl space-y-2.5">
               <div className="flex justify-between items-center text-xs font-mono">
-                <span className="text-emerald-700 font-bold">Peter Obi (NDC)</span>
-                <span className="text-slate-900 font-bold text-base tabular-nums">
+                <div className="flex items-center gap-2">
+                  <img
+                    src={CANDIDATES[0].imageUrl}
+                    alt="Peter Obi"
+                    referrerPolicy="no-referrer"
+                    className="w-7 h-7 rounded-lg object-cover object-top border border-emerald-500 shadow-2xs"
+                  />
+                  <div>
+                    <span className="text-emerald-700 font-bold block">Peter Obi</span>
+                    <span className="text-[10px] text-slate-500">NDC Coalition</span>
+                  </div>
+                </div>
+                <span className="text-slate-900 font-extrabold text-lg tabular-nums">
                   {selectedZone.candidateShares['peter-obi']}%
                 </span>
               </div>
@@ -148,10 +173,10 @@ export const GeopoliticalZonesView: React.FC = () => {
                   style={{ width: `${selectedZone.candidateShares['peter-obi']}%` }}
                 ></div>
               </div>
-              <div className="text-[11px] text-slate-500 font-mono">
+              <div className="text-[11px] text-slate-500 font-mono pt-1">
                 {selectedZone.candidateShares['peter-obi'] >= 25 ? (
                   <span className="text-emerald-700 flex items-center gap-1 font-semibold">
-                    <CheckCircle className="w-3 h-3" /> Exceeds 25% Constitutional threshold
+                    <CheckCircle className="w-3.5 h-3.5" /> Exceeds 25% Constitutional threshold
                   </span>
                 ) : (
                   <span className="text-slate-500">Below 25% threshold in rural wards</span>
@@ -160,10 +185,21 @@ export const GeopoliticalZonesView: React.FC = () => {
             </div>
 
             {/* Bola Tinubu */}
-            <div className="p-4 bg-slate-50 border border-slate-200 rounded-lg space-y-2">
+            <div className="p-4 bg-slate-50 border border-slate-200 rounded-xl space-y-2.5">
               <div className="flex justify-between items-center text-xs font-mono">
-                <span className="text-blue-700 font-bold">Bola Tinubu (APC)</span>
-                <span className="text-slate-900 font-bold text-base tabular-nums">
+                <div className="flex items-center gap-2">
+                  <img
+                    src={CANDIDATES[1].imageUrl}
+                    alt="Bola Tinubu"
+                    referrerPolicy="no-referrer"
+                    className="w-7 h-7 rounded-lg object-cover object-top border border-blue-500 shadow-2xs"
+                  />
+                  <div>
+                    <span className="text-blue-700 font-bold block">Bola Tinubu</span>
+                    <span className="text-[10px] text-slate-500">APC Incumbent</span>
+                  </div>
+                </div>
+                <span className="text-slate-900 font-extrabold text-lg tabular-nums">
                   {selectedZone.candidateShares['bola-tinubu']}%
                 </span>
               </div>
@@ -173,10 +209,10 @@ export const GeopoliticalZonesView: React.FC = () => {
                   style={{ width: `${selectedZone.candidateShares['bola-tinubu']}%` }}
                 ></div>
               </div>
-              <div className="text-[11px] text-slate-500 font-mono">
+              <div className="text-[11px] text-slate-500 font-mono pt-1">
                 {selectedZone.candidateShares['bola-tinubu'] >= 25 ? (
                   <span className="text-blue-700 flex items-center gap-1 font-semibold">
-                    <CheckCircle className="w-3 h-3" /> Exceeds 25% Constitutional threshold
+                    <CheckCircle className="w-3.5 h-3.5" /> Exceeds 25% Constitutional threshold
                   </span>
                 ) : (
                   <span className="text-slate-500">Underperforming 25% threshold mark</span>
@@ -185,10 +221,21 @@ export const GeopoliticalZonesView: React.FC = () => {
             </div>
 
             {/* Atiku Abubakar */}
-            <div className="p-4 bg-slate-50 border border-slate-200 rounded-lg space-y-2">
+            <div className="p-4 bg-slate-50 border border-slate-200 rounded-xl space-y-2.5">
               <div className="flex justify-between items-center text-xs font-mono">
-                <span className="text-amber-700 font-bold">Atiku Abubakar (ADC)</span>
-                <span className="text-slate-900 font-bold text-base tabular-nums">
+                <div className="flex items-center gap-2">
+                  <img
+                    src={CANDIDATES[2].imageUrl}
+                    alt="Atiku Abubakar"
+                    referrerPolicy="no-referrer"
+                    className="w-7 h-7 rounded-lg object-cover object-top border border-amber-500 shadow-2xs"
+                  />
+                  <div>
+                    <span className="text-amber-700 font-bold block">Atiku Abubakar</span>
+                    <span className="text-[10px] text-slate-500">ADC Alliance</span>
+                  </div>
+                </div>
+                <span className="text-slate-900 font-extrabold text-lg tabular-nums">
                   {selectedZone.candidateShares['atiku-abubakar']}%
                 </span>
               </div>
@@ -198,10 +245,10 @@ export const GeopoliticalZonesView: React.FC = () => {
                   style={{ width: `${selectedZone.candidateShares['atiku-abubakar']}%` }}
                 ></div>
               </div>
-              <div className="text-[11px] text-slate-500 font-mono">
+              <div className="text-[11px] text-slate-500 font-mono pt-1">
                 {selectedZone.candidateShares['atiku-abubakar'] >= 25 ? (
                   <span className="text-amber-700 flex items-center gap-1 font-semibold">
-                    <CheckCircle className="w-3 h-3" /> Exceeds 25% Constitutional threshold
+                    <CheckCircle className="w-3.5 h-3.5" /> Exceeds 25% Constitutional threshold
                   </span>
                 ) : (
                   <span className="text-slate-500">Below 25% threshold mark</span>

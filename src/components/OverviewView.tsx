@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { CANDIDATES, GEOPOLITICAL_ZONES, ECONOMIC_ISSUES } from '../data/electionData';
+import { CANDIDATES, GEOPOLITICAL_ZONES, ECONOMIC_ISSUES, HERO_BANNER_URL } from '../data/electionData';
 import { Candidate, CandidateId } from '../types/election';
-import { ArrowUpRight, ArrowDownRight, Fuel, MapPin, Users, Activity, ExternalLink, BarChart3, Radio } from 'lucide-react';
+import { ArrowUpRight, ArrowDownRight, Fuel, MapPin, Users, Activity, ExternalLink, BarChart3, Radio, Sparkles } from 'lucide-react';
 
 interface OverviewViewProps {
   onSelectCandidate: (candidateId: CandidateId) => void;
@@ -18,47 +18,79 @@ export const OverviewView: React.FC<OverviewViewProps> = ({
 
   return (
     <div className="space-y-8">
-      {/* Executive Intelligence Headline */}
-      <div className="border border-slate-200 bg-white rounded-xl p-5 sm:p-6 shadow-xs">
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-200 pb-5">
-          <div>
-            <div className="text-xs uppercase tracking-wider text-emerald-700 font-mono font-semibold mb-1">
-              INEC 2027 Election Cycle · September 2026 Intelligence Wave
-            </div>
-            <h1 className="text-xl sm:text-2xl font-bold tracking-tight text-slate-900">
-              Three-Way Race: Opposition Lead Narrows as Incumbent Rebounds
-            </h1>
-            <p className="text-sm text-slate-600 mt-1 max-w-3xl leading-relaxed">
-              Peter Obi (NDC) retains plurality in scientific polling (42.2%), but the landslide has vanished (margin over Tinubu contracted from 46.1 to 16.7 pts). 
-              A stark <span className="text-slate-900 font-medium">Urban vs Rural divergence</span> and <span className="text-slate-900 font-medium">petrol prices</span> govern the swing dynamics.
-            </p>
+      {/* Bold Editorial Hero Intelligence Showcase */}
+      <div className="relative overflow-hidden rounded-2xl border border-slate-200 bg-slate-900 text-white shadow-xl">
+        <div className="absolute inset-0">
+          <img
+            src={HERO_BANNER_URL}
+            alt="Nigeria 2027 Presidential Election Intelligence Map"
+            referrerPolicy="no-referrer"
+            className="w-full h-full object-cover opacity-35 filter saturate-125"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-slate-950/95 via-slate-900/80 to-transparent"></div>
+        </div>
+
+        <div className="relative z-10 p-6 sm:p-8 lg:p-10 max-w-4xl">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-emerald-500/20 border border-emerald-400/30 text-emerald-300 text-xs font-mono font-semibold mb-3">
+            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+            <span>INEC 2027 ELECTION CYCLE · SEPTEMBER 2026 INTELLIGENCE WAVE</span>
           </div>
 
-          {/* National mood stat */}
-          <div className="flex items-center gap-4 bg-slate-50 border border-slate-200 px-4 py-3 rounded-lg shrink-0">
+          <h1 className="text-2xl sm:text-3xl lg:text-4xl font-black tracking-tight text-white leading-tight">
+            Nigeria Decides 2027: Three-Way Race Tightens as Grassroots Dynamics Shift
+          </h1>
+
+          <p className="mt-3 text-sm sm:text-base text-slate-200 max-w-2xl leading-relaxed font-normal">
+            Independent multi-source intelligence synthesizing <span className="text-emerald-400 font-semibold">14,200+ hourly social signals</span>, 
+            the SBM Intelligence scientific probability baseline ($N=1,103$), and Oxford-Metro digital audits.
+          </p>
+
+          <div className="mt-6 pt-5 border-t border-slate-700/60 flex flex-wrap items-center gap-6 sm:gap-8 font-mono text-xs">
             <div>
-              <div className="text-xs text-slate-500 font-medium">National Pessimism Rate</div>
-              <div className="flex items-baseline gap-1.5 mt-0.5">
-                <span className="text-xl font-bold font-mono text-amber-700 tabular-nums">56.8%</span>
-                <span className="text-xs text-emerald-700 flex items-center font-mono font-semibold">
-                  <ArrowDownRight className="w-3.5 h-3.5" /> -22.7%
-                </span>
-              </div>
-              <div className="text-[11px] text-slate-500 mt-0.5">Down from 79.5% in May 2026</div>
+              <span className="text-slate-400 block text-[11px] uppercase tracking-wider">Scientific Plurality</span>
+              <span className="text-xl sm:text-2xl font-extrabold text-emerald-400">Peter Obi (42.2%)</span>
+              <span className="text-slate-400 block text-[10px] mt-0.5">Narrowed from 57.4% in May</span>
             </div>
-            <div className="h-8 w-px bg-slate-200"></div>
+
+            <div className="hidden sm:block h-10 w-px bg-slate-700"></div>
+
             <div>
-              <div className="text-xs text-slate-500 font-medium">Current Fuel Baseline</div>
-              <div className="text-xl font-bold font-mono text-slate-900 tabular-nums mt-0.5">
-                ₦1,370<span className="text-xs font-normal text-slate-500">/L</span>
-              </div>
-              <div className="text-[11px] text-slate-500 mt-0.5">MRS Abuja pump rate</div>
+              <span className="text-slate-400 block text-[11px] uppercase tracking-wider">Incumbent Rebound</span>
+              <span className="text-xl sm:text-2xl font-extrabold text-blue-400">Bola Tinubu (25.5%)</span>
+              <span className="text-slate-400 block text-[10px] mt-0.5">Up from 11.0% in May</span>
+            </div>
+
+            <div className="hidden sm:block h-10 w-px bg-slate-700"></div>
+
+            <div>
+              <span className="text-slate-400 block text-[11px] uppercase tracking-wider">Current Fuel Pump Rate</span>
+              <span className="text-xl sm:text-2xl font-extrabold text-white">₦1,370<span className="text-xs font-normal text-slate-400">/L</span></span>
+              <span className="text-slate-400 block text-[10px] mt-0.5">MRS Abuja benchmark</span>
             </div>
           </div>
         </div>
+      </div>
 
-        {/* Top 3 Contenders Grid */}
-        <div className="grid md:grid-cols-3 gap-4 pt-5">
+      {/* Main Contender Cards with Bold Editorial Portraits */}
+      <div className="border border-slate-200 bg-white rounded-xl p-5 sm:p-6 shadow-xs">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-200 pb-4">
+          <div>
+            <h2 className="text-lg sm:text-xl font-bold tracking-tight text-slate-900">
+              The Presidential Contenders: Certified Slate & Polling Standings
+            </h2>
+            <p className="text-xs text-slate-500 mt-0.5">
+              Select any candidate card to view certified INEC credentials, running mate profiles, and policy stances.
+            </p>
+          </div>
+
+          <div className="flex items-center gap-1.5 text-xs font-mono text-slate-500 bg-slate-50 px-3 py-1.5 rounded-lg border border-slate-200 self-start sm:self-auto">
+            <span className="w-2 h-2 rounded-full bg-emerald-600"></span>
+            <span>Click card for detailed dossier</span>
+          </div>
+        </div>
+
+        {/* Top 3 Contenders Grid with Prominent Photos */}
+        <div className="grid md:grid-cols-3 gap-5 pt-5">
           {CANDIDATES.map((cand) => {
             const isObi = cand.id === 'peter-obi';
             const isTinubu = cand.id === 'bola-tinubu';
@@ -82,91 +114,95 @@ export const OverviewView: React.FC<OverviewViewProps> = ({
               <div
                 key={cand.id}
                 onClick={() => onSelectCandidate(cand.id)}
-                className="group relative bg-white border border-slate-200 hover:border-slate-300 rounded-lg p-5 transition-all cursor-pointer hover:shadow-md shadow-xs"
+                className="group relative bg-white border-2 border-slate-200 hover:border-slate-400 rounded-xl p-5 transition-all cursor-pointer hover:shadow-lg shadow-xs flex flex-col justify-between"
               >
-                {/* Top header row */}
-                <div className="flex items-start justify-between">
-                  <div>
-                    <div className="flex items-center gap-2">
+                <div>
+                  {/* Top Candidate Identity with Editorial Photo */}
+                  <div className="flex items-start gap-3.5">
+                    <div className="relative shrink-0">
+                      <img
+                        src={cand.imageUrl}
+                        alt={cand.name}
+                        referrerPolicy="no-referrer"
+                        className="w-16 h-16 sm:w-20 sm:h-20 rounded-xl object-cover object-top border-2 shadow-sm transition-transform duration-300 group-hover:scale-105"
+                        style={{ borderColor: cand.color }}
+                      />
                       <span
-                        className="w-2.5 h-2.5 rounded-full"
+                        className="absolute -bottom-1 -right-1 px-1.5 py-0.5 rounded text-[10px] font-bold font-mono text-white shadow-xs"
                         style={{ backgroundColor: cand.color }}
-                      ></span>
-                      <span className="text-xs font-bold tracking-wider text-slate-700 font-mono">
+                      >
                         {cand.party}
                       </span>
-                      <span className="text-xs text-slate-500 font-mono">· Age {cand.age}</span>
                     </div>
-                    <h2 className="text-lg font-bold text-slate-900 mt-1 group-hover:text-emerald-700 transition-colors">
-                      {cand.name}
-                    </h2>
+
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center gap-2">
+                        <span className="text-xs font-bold tracking-wider text-slate-700 font-mono">
+                          {cand.party}
+                        </span>
+                        <span className="text-xs text-slate-500 font-mono">· Age {cand.age}</span>
+                      </div>
+                      <h3 className="text-lg font-bold text-slate-900 mt-0.5 group-hover:text-emerald-700 transition-colors truncate">
+                        {cand.name}
+                      </h3>
+                      <div className="text-xs text-slate-500 truncate mt-0.5">
+                        Running mate: <span className="font-semibold text-slate-700">{cand.runningMate}</span>
+                      </div>
+                    </div>
                   </div>
 
-                  <div className="text-right">
-                    <span className="text-xs text-slate-500 block">{pollLabel}</span>
-                    <span className="text-2xl font-bold font-mono text-slate-900 tabular-nums">
-                      {displayedPoll.toFixed(1)}%
-                    </span>
-                  </div>
-                </div>
+                  {/* Poll Metric Spotlight */}
+                  <div className="mt-4 p-3 bg-slate-50 border border-slate-200 rounded-lg flex items-center justify-between">
+                    <div>
+                      <span className="text-[11px] text-slate-500 block font-mono">{pollLabel}</span>
+                      <span className="text-2xl font-extrabold font-mono text-slate-900 tabular-nums">
+                        {displayedPoll.toFixed(1)}%
+                      </span>
+                    </div>
 
-                {/* Running Mate & Net Favorability */}
-                <div className="mt-3 pt-3 border-t border-slate-100 text-xs space-y-2">
-                  <div className="flex items-center justify-between text-slate-600">
-                    <span>Running Mate:</span>
-                    <span className="text-slate-900 font-medium">
-                      {cand.runningMate} ({cand.runningMateAge})
-                    </span>
-                  </div>
-
-                  <div className="flex items-center justify-between">
-                    <span className="text-slate-600">Net Favorability:</span>
-                    <div className="flex items-center gap-1 font-mono font-semibold">
+                    <div className="text-right">
+                      <span className="text-[11px] text-slate-500 block font-mono">Net Favorability</span>
                       <span
-                        className={
+                        className={`text-base font-bold font-mono tabular-nums ${
                           cand.netFavorabilitySept > 0 ? 'text-emerald-700' : 'text-rose-700'
-                        }
+                        }`}
                       >
                         {cand.netFavorabilitySept > 0 ? '+' : ''}
                         {cand.netFavorabilitySept}
                       </span>
-                      <span className="text-slate-500 font-normal text-[11px]">
-                        (was {cand.netFavorabilityMay > 0 ? '+' : ''}
-                        {cand.netFavorabilityMay})
-                      </span>
                     </div>
                   </div>
 
-                  <div className="flex items-center justify-between">
-                    <span className="text-slate-600">Urban vs Rural:</span>
-                    <span className="text-slate-900 font-mono">
-                      {cand.urbanShare}% <span className="text-slate-500">U</span> / {cand.ruralShare}% <span className="text-slate-500">R</span>
-                    </span>
+                  {/* Progress bar visual */}
+                  <div className="mt-3">
+                    <div className="h-2 w-full bg-slate-100 rounded-full overflow-hidden">
+                      <div
+                        className="h-full rounded-full transition-all duration-500"
+                        style={{
+                          width: `${displayedPoll}%`,
+                          backgroundColor: cand.color,
+                        }}
+                      ></div>
+                    </div>
                   </div>
+
+                  {/* Urban vs Rural breakdown preview */}
+                  <div className="mt-3 pt-3 border-t border-slate-100 flex items-center justify-between text-xs font-mono text-slate-600">
+                    <span>Urban: <strong className="text-slate-900">{cand.urbanShare}%</strong></span>
+                    <span>·</span>
+                    <span>Rural: <strong className="text-slate-900">{cand.ruralShare}%</strong></span>
+                  </div>
+
+                  {/* Key takeaway */}
+                  <p className="mt-2.5 text-xs text-slate-600 line-clamp-2 leading-relaxed font-sans">
+                    {cand.keyStrengths}
+                  </p>
                 </div>
 
-                {/* Progress bar visual */}
-                <div className="mt-4">
-                  <div className="h-1.5 w-full bg-slate-100 rounded-full overflow-hidden">
-                    <div
-                      className="h-full rounded-full transition-all duration-500"
-                      style={{
-                        width: `${displayedPoll}%`,
-                        backgroundColor: cand.color,
-                      }}
-                    ></div>
-                  </div>
-                </div>
-
-                {/* Key takeaway */}
-                <p className="mt-3 text-xs text-slate-600 line-clamp-2 leading-relaxed font-sans">
-                  {cand.keyStrengths}
-                </p>
-
-                <div className="mt-3 pt-2 flex items-center justify-between text-[11px] text-slate-500 font-mono">
-                  <span>{cand.primaryBases[0]}</span>
-                  <span className="text-emerald-700 font-semibold group-hover:translate-x-0.5 transition-transform flex items-center gap-0.5">
-                    View Dossier <ArrowUpRight className="w-3 h-3" />
+                <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-[11px] font-mono">
+                  <span className="text-slate-500 truncate max-w-[150px]">{cand.primaryBases[0]}</span>
+                  <span className="text-emerald-700 font-bold group-hover:translate-x-0.5 transition-transform flex items-center gap-0.5">
+                    Open Dossier <ArrowUpRight className="w-3.5 h-3.5" />
                   </span>
                 </div>
               </div>
@@ -253,17 +289,41 @@ export const OverviewView: React.FC<OverviewViewProps> = ({
 
             <div className="divide-y divide-slate-100 font-mono">
               <div className="grid grid-cols-3 p-2.5 items-center">
-                <span className="text-slate-800">NDC (Peter Obi)</span>
+                <div className="flex items-center gap-2">
+                  <img
+                    src={CANDIDATES[0].imageUrl}
+                    alt={CANDIDATES[0].name}
+                    referrerPolicy="no-referrer"
+                    className="w-6 h-6 rounded-full object-cover object-top border border-emerald-500 shadow-2xs"
+                  />
+                  <span className="text-slate-900 font-semibold">NDC (Peter Obi)</span>
+                </div>
                 <span className="text-center font-bold text-emerald-700 tabular-nums">49.5%</span>
                 <span className="text-center text-slate-700 tabular-nums">27.6%</span>
               </div>
               <div className="grid grid-cols-3 p-2.5 items-center">
-                <span className="text-slate-800">APC (Bola Tinubu)</span>
+                <div className="flex items-center gap-2">
+                  <img
+                    src={CANDIDATES[1].imageUrl}
+                    alt={CANDIDATES[1].name}
+                    referrerPolicy="no-referrer"
+                    className="w-6 h-6 rounded-full object-cover object-top border border-blue-500 shadow-2xs"
+                  />
+                  <span className="text-slate-900 font-semibold">APC (Bola Tinubu)</span>
+                </div>
                 <span className="text-center text-slate-700 tabular-nums">20.9%</span>
                 <span className="text-center font-bold text-blue-700 tabular-nums">35.2%</span>
               </div>
               <div className="grid grid-cols-3 p-2.5 items-center">
-                <span className="text-slate-800">ADC (Atiku Abubakar)</span>
+                <div className="flex items-center gap-2">
+                  <img
+                    src={CANDIDATES[2].imageUrl}
+                    alt={CANDIDATES[2].name}
+                    referrerPolicy="no-referrer"
+                    className="w-6 h-6 rounded-full object-cover object-top border border-amber-500 shadow-2xs"
+                  />
+                  <span className="text-slate-900 font-semibold">ADC (Atiku Abubakar)</span>
+                </div>
                 <span className="text-center text-slate-700 tabular-nums">22.1%</span>
                 <span className="text-center text-amber-700 tabular-nums">29.8%</span>
               </div>
@@ -339,21 +399,47 @@ export const OverviewView: React.FC<OverviewViewProps> = ({
             </div>
           </div>
 
-          {/* Candidate Policy Stances Summary */}
+          {/* Candidate Policy Stances Summary with Photos */}
           <div className="space-y-2 text-xs">
             <div className="text-slate-800 font-semibold font-mono">Contender Stances on Petrol:</div>
-            <div className="space-y-1.5">
-              <div className="p-2 bg-slate-50 border border-slate-200 rounded">
-                <span className="font-bold text-emerald-700 font-mono">Peter Obi (NDC): </span>
-                <span className="text-slate-700">Transparent subsidy regime with end-to-end crude & import auditing.</span>
+            <div className="space-y-2">
+              <div className="p-2.5 bg-slate-50 border border-slate-200 rounded-lg flex items-start gap-2.5">
+                <img
+                  src={CANDIDATES[0].imageUrl}
+                  alt={CANDIDATES[0].name}
+                  referrerPolicy="no-referrer"
+                  className="w-7 h-7 rounded-full object-cover object-top border border-emerald-500 shrink-0 mt-0.5"
+                />
+                <div>
+                  <span className="font-bold text-emerald-700 font-mono">Peter Obi (NDC): </span>
+                  <span className="text-slate-700">Transparent subsidy regime with end-to-end crude & import auditing.</span>
+                </div>
               </div>
-              <div className="p-2 bg-slate-50 border border-slate-200 rounded">
-                <span className="font-bold text-amber-700 font-mono">Atiku (ADC): </span>
-                <span className="text-slate-700">Capped production subsidy for local refiners; excludes imported fuel.</span>
+
+              <div className="p-2.5 bg-slate-50 border border-slate-200 rounded-lg flex items-start gap-2.5">
+                <img
+                  src={CANDIDATES[2].imageUrl}
+                  alt={CANDIDATES[2].name}
+                  referrerPolicy="no-referrer"
+                  className="w-7 h-7 rounded-full object-cover object-top border border-amber-500 shrink-0 mt-0.5"
+                />
+                <div>
+                  <span className="font-bold text-amber-700 font-mono">Atiku Abubakar (ADC): </span>
+                  <span className="text-slate-700">Capped production subsidy for local refiners; excludes imported fuel.</span>
+                </div>
               </div>
-              <div className="p-2 bg-slate-50 border border-slate-200 rounded">
-                <span className="font-bold text-blue-700 font-mono">Tinubu (APC): </span>
-                <span className="text-slate-700">Complete PIA deregulation; expects Dangote output to organically ease prices.</span>
+
+              <div className="p-2.5 bg-slate-50 border border-slate-200 rounded-lg flex items-start gap-2.5">
+                <img
+                  src={CANDIDATES[1].imageUrl}
+                  alt={CANDIDATES[1].name}
+                  referrerPolicy="no-referrer"
+                  className="w-7 h-7 rounded-full object-cover object-top border border-blue-500 shrink-0 mt-0.5"
+                />
+                <div>
+                  <span className="font-bold text-blue-700 font-mono">Bola Tinubu (APC): </span>
+                  <span className="text-slate-700">Complete PIA deregulation; expects Dangote output to organically ease prices.</span>
+                </div>
               </div>
             </div>
           </div>

@@ -31,6 +31,7 @@ export interface Candidate {
   netFavorabilityMay: number;  // Obi strong positive, Tinubu -58.5
   urbanShare: number;          // SBM: Obi 49.5%, Tinubu 20.9%
   ruralShare: number;          // SBM: Obi 27.6%, Tinubu 35.2%
+  imageUrl: string;            // Portrait photograph
   primaryBases: string[];
   petrolPolicyStance: string;
   keyStrengths: string;

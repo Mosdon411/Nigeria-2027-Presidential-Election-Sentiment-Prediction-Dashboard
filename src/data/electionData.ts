@@ -20,6 +20,7 @@ export const CANDIDATES: Candidate[] = [
     netFavorabilityMay: 68.4,
     urbanShare: 49.5,
     ruralShare: 27.6,
+    imageUrl: '/src/assets/images/peter_obi_portrait_1792675859433.jpg',
     primaryBases: ['South-East', 'South-South', 'Urban Youth', 'North-Central pockets'],
     petrolPolicyStance: 'Promises a transparent fuel subsidy regime with mandatory full-chain monitoring of crude production, transactions, import volumes, and NNPC revenue remittances.',
     keyStrengths: 'High national favorability (+52.8), dominance among educated urban voters (49.5%), youth mobilizers.',
@@ -44,6 +45,7 @@ export const CANDIDATES: Candidate[] = [
     netFavorabilityMay: -58.5,
     urbanShare: 20.9,
     ruralShare: 35.2,
+    imageUrl: '/src/assets/images/bola_tinubu_portrait_1792675859971.jpg',
     primaryBases: ['South-West', 'Rural North-West & North-East', 'Traditional rulers & state governors'],
     petrolPolicyStance: 'Defends complete market deregulation under Petroleum Industry Act (PIA); argues domestic Dangote & Port Harcourt refineries will organically stabilize prices at ~N1,250/L.',
     keyStrengths: 'Massive sympathy rebound (net score jumped from -58.5 to -3.3); formidable rural ground game (35.2%); 22 state governor machines.',
@@ -68,12 +70,15 @@ export const CANDIDATES: Candidate[] = [
     netFavorabilityMay: -4.1,
     urbanShare: 22.1,
     ruralShare: 29.8,
+    imageUrl: '/src/assets/images/atiku_abubakar_portrait_1792675860169.jpg',
     primaryBases: ['North-East (Adamawa/Taraba)', 'Selected North-West commercial hubs', 'Disenchanted PDP stalwarts'],
     petrolPolicyStance: 'Proposes capped, budgeted production subsidy tied exclusively to locally refined fuel from modular and commercial refineries; requires published costs and National Assembly approval.',
     keyStrengths: 'Deep commercial elite connections, strong online campaign presence (73.6% in TMG poll), North-East core base.',
     vulnerability: 'Age scrutiny (79 years old); vote splitting with NDC splits anti-incumbent opposition; APC challenges PIA legality of proposal.',
   },
 ];
+
+export const HERO_BANNER_URL = '/src/assets/images/election_hero_banner_1792675861509.jpg';
 
 export const GEOPOLITICAL_ZONES: ZoneData[] = [
   {

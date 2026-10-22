@@ -94,39 +94,69 @@ export const PollComparisonView: React.FC = () => {
                 </div>
               </div>
 
-              {/* Candidate Scores Bar */}
-              <div className="mt-4 pt-3 border-t border-slate-100 space-y-2 text-xs font-mono">
-                <div className="flex items-center justify-between">
-                  <span className="text-emerald-700 font-semibold">Peter Obi (NDC)</span>
-                  <span className="text-slate-900 font-bold tabular-nums">{poll.obiScore}%</span>
-                </div>
-                <div className="h-1.5 w-full bg-slate-100 rounded-full overflow-hidden">
-                  <div
-                    className="h-full bg-emerald-600 rounded-full"
-                    style={{ width: `${poll.obiScore}%` }}
-                  ></div>
+              {/* Candidate Scores Bar with Photos */}
+              <div className="mt-4 pt-3 border-t border-slate-100 space-y-2.5 text-xs font-mono">
+                <div>
+                  <div className="flex items-center justify-between mb-1">
+                    <div className="flex items-center gap-1.5">
+                      <img
+                        src={CANDIDATES[0].imageUrl}
+                        alt="Peter Obi"
+                        referrerPolicy="no-referrer"
+                        className="w-5 h-5 rounded-full object-cover object-top border border-emerald-500"
+                      />
+                      <span className="text-emerald-700 font-semibold">Peter Obi (NDC)</span>
+                    </div>
+                    <span className="text-slate-900 font-bold tabular-nums">{poll.obiScore}%</span>
+                  </div>
+                  <div className="h-1.5 w-full bg-slate-100 rounded-full overflow-hidden">
+                    <div
+                      className="h-full bg-emerald-600 rounded-full"
+                      style={{ width: `${poll.obiScore}%` }}
+                    ></div>
+                  </div>
                 </div>
 
-                <div className="flex items-center justify-between">
-                  <span className="text-blue-700 font-semibold">Bola Tinubu (APC)</span>
-                  <span className="text-slate-900 font-bold tabular-nums">{poll.tinubuScore}%</span>
-                </div>
-                <div className="h-1.5 w-full bg-slate-100 rounded-full overflow-hidden">
-                  <div
-                    className="h-full bg-blue-600 rounded-full"
-                    style={{ width: `${poll.tinubuScore}%` }}
-                  ></div>
+                <div>
+                  <div className="flex items-center justify-between mb-1">
+                    <div className="flex items-center gap-1.5">
+                      <img
+                        src={CANDIDATES[1].imageUrl}
+                        alt="Bola Tinubu"
+                        referrerPolicy="no-referrer"
+                        className="w-5 h-5 rounded-full object-cover object-top border border-blue-500"
+                      />
+                      <span className="text-blue-700 font-semibold">Bola Tinubu (APC)</span>
+                    </div>
+                    <span className="text-slate-900 font-bold tabular-nums">{poll.tinubuScore}%</span>
+                  </div>
+                  <div className="h-1.5 w-full bg-slate-100 rounded-full overflow-hidden">
+                    <div
+                      className="h-full bg-blue-600 rounded-full"
+                      style={{ width: `${poll.tinubuScore}%` }}
+                    ></div>
+                  </div>
                 </div>
 
-                <div className="flex items-center justify-between">
-                  <span className="text-amber-700 font-semibold">Atiku Abubakar (ADC)</span>
-                  <span className="text-slate-900 font-bold tabular-nums">{poll.atikuScore}%</span>
-                </div>
-                <div className="h-1.5 w-full bg-slate-100 rounded-full overflow-hidden">
-                  <div
-                    className="h-full bg-amber-500 rounded-full"
-                    style={{ width: `${poll.atikuScore}%` }}
-                  ></div>
+                <div>
+                  <div className="flex items-center justify-between mb-1">
+                    <div className="flex items-center gap-1.5">
+                      <img
+                        src={CANDIDATES[2].imageUrl}
+                        alt="Atiku Abubakar"
+                        referrerPolicy="no-referrer"
+                        className="w-5 h-5 rounded-full object-cover object-top border border-amber-500"
+                      />
+                      <span className="text-amber-700 font-semibold">Atiku Abubakar (ADC)</span>
+                    </div>
+                    <span className="text-slate-900 font-bold tabular-nums">{poll.atikuScore}%</span>
+                  </div>
+                  <div className="h-1.5 w-full bg-slate-100 rounded-full overflow-hidden">
+                    <div
+                      className="h-full bg-amber-500 rounded-full"
+                      style={{ width: `${poll.atikuScore}%` }}
+                    ></div>
+                  </div>
                 </div>
               </div>
 
@@ -219,7 +249,17 @@ export const PollComparisonView: React.FC = () => {
             </thead>
             <tbody className="divide-y divide-slate-100 bg-white">
               <tr>
-                <td className="p-3 font-semibold text-slate-900">Peter Obi</td>
+                <td className="p-3 font-semibold text-slate-900">
+                  <div className="flex items-center gap-2">
+                    <img
+                      src={CANDIDATES[0].imageUrl}
+                      alt="Peter Obi"
+                      referrerPolicy="no-referrer"
+                      className="w-7 h-7 rounded-full object-cover object-top border border-emerald-500 shadow-2xs"
+                    />
+                    <span>Peter Obi</span>
+                  </div>
+                </td>
                 <td className="p-3 text-emerald-700 font-bold">NDC</td>
                 <td className="p-3 text-slate-700">65</td>
                 <td className="p-3 text-slate-700">Rabiu Musa Kwankwaso</td>
@@ -228,7 +268,17 @@ export const PollComparisonView: React.FC = () => {
                 <td className="p-3 text-slate-600">South-East, South-South, Urban Youths</td>
               </tr>
               <tr>
-                <td className="p-3 font-semibold text-slate-900">Bola Ahmed Tinubu</td>
+                <td className="p-3 font-semibold text-slate-900">
+                  <div className="flex items-center gap-2">
+                    <img
+                      src={CANDIDATES[1].imageUrl}
+                      alt="Bola Tinubu"
+                      referrerPolicy="no-referrer"
+                      className="w-7 h-7 rounded-full object-cover object-top border border-blue-500 shadow-2xs"
+                    />
+                    <span>Bola Ahmed Tinubu</span>
+                  </div>
+                </td>
                 <td className="p-3 text-blue-700 font-bold">APC</td>
                 <td className="p-3 text-slate-700">74</td>
                 <td className="p-3 text-slate-700">Kashim Shettima</td>
@@ -237,7 +287,17 @@ export const PollComparisonView: React.FC = () => {
                 <td className="p-3 text-slate-600">South-West, Rural North, 22 Governors</td>
               </tr>
               <tr>
-                <td className="p-3 font-semibold text-slate-900">Atiku Abubakar</td>
+                <td className="p-3 font-semibold text-slate-900">
+                  <div className="flex items-center gap-2">
+                    <img
+                      src={CANDIDATES[2].imageUrl}
+                      alt="Atiku Abubakar"
+                      referrerPolicy="no-referrer"
+                      className="w-7 h-7 rounded-full object-cover object-top border border-amber-500 shadow-2xs"
+                    />
+                    <span>Atiku Abubakar</span>
+                  </div>
+                </td>
                 <td className="p-3 text-amber-700 font-bold">ADC</td>
                 <td className="p-3 text-slate-700">79</td>
                 <td className="p-3 text-slate-700">Rotimi Amaechi</td>

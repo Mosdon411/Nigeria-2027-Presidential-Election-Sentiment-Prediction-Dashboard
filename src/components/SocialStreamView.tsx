@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { INITIAL_SOCIAL_POSTS, NIGERIAN_PIDGIN_DICTIONARY } from '../data/electionData';
+import { INITIAL_SOCIAL_POSTS, NIGERIAN_PIDGIN_DICTIONARY, CANDIDATES } from '../data/electionData';
 import { SocialPost, PlatformId, CandidateId, SentimentPolarity, EmotionType } from '../types/election';
 import { analyzeNigerianPoliticalText, NlpAnalysisResult } from '../utils/nlpEngine';
 import { 
@@ -421,12 +421,30 @@ export const SocialStreamView: React.FC<SocialStreamViewProps> = ({ onOpenAddPos
                       <span className="text-slate-500 font-mono">{post.timestampMinutesAgo}m ago</span>
                     </div>
 
-                    <div className="flex items-center gap-2 mt-1 text-[11px] text-slate-500 font-mono">
+                    <div className="flex flex-wrap items-center gap-2 mt-1 text-[11px] text-slate-500 font-mono">
                       <span>{post.cityState} ({post.zone})</span>
                       <span>·</span>
                       <span>Lang: {post.language}</span>
                       <span>·</span>
                       <span>Issue: {post.issueTag}</span>
+                      {post.candidate && post.candidate !== 'other' && (() => {
+                        const cand = CANDIDATES.find(c => c.id === post.candidate);
+                        return cand ? (
+                          <>
+                            <span>·</span>
+                            <span className="inline-flex items-center gap-1 font-semibold text-slate-800">
+                              <img
+                                src={cand.imageUrl}
+                                alt={cand.name}
+                                referrerPolicy="no-referrer"
+                                className="w-4 h-4 rounded-full object-cover object-top border shadow-2xs"
+                                style={{ borderColor: cand.color }}
+                              />
+                              <span>{cand.party}</span>
+                            </span>
+                          </>
+                        ) : null;
+                      })()}
                     </div>
                   </div>
 

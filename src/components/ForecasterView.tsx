@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { SimulationState } from '../types/election';
 import { runElectoralSimulation } from '../utils/simulatorEngine';
+import { CANDIDATES } from '../data/electionData';
 import { Sliders, RefreshCw, Award, AlertTriangle, CheckCircle, Scale, ChevronRight } from 'lucide-react';
 
 export const ForecasterView: React.FC = () => {
@@ -243,27 +244,64 @@ export const ForecasterView: React.FC = () => {
             </div>
 
             {result.outcomeType === 'FIRST_ROUND_VICTORY' ? (
-              <div className="p-4 bg-emerald-50 border border-emerald-200 rounded-lg flex items-start gap-3">
-                <Award className="w-5 h-5 text-emerald-600 shrink-0 mt-0.5" />
+              <div className="p-4 bg-emerald-50 border border-emerald-200 rounded-lg flex items-start gap-3.5">
+                <div className="relative shrink-0">
+                  {(() => {
+                    const winnerCandidate = result.projectedWinner
+                      ? CANDIDATES.find(c => result.projectedWinner!.includes(c.name) || result.projectedWinner!.includes(c.party))
+                      : undefined;
+                    return winnerCandidate ? (
+                      <img
+                        src={winnerCandidate.imageUrl}
+                        alt={winnerCandidate.name}
+                        referrerPolicy="no-referrer"
+                        className="w-12 h-12 rounded-xl object-cover object-top border-2 border-emerald-600 shadow-sm"
+                      />
+                    ) : (
+                      <Award className="w-8 h-8 text-emerald-600" />
+                    );
+                  })()}
+                </div>
                 <div>
-                  <h3 className="text-base font-bold text-emerald-900">
-                    Outright First-Round Victory Projected
+                  <div className="flex items-center gap-1.5 text-xs font-mono font-bold text-emerald-800 uppercase">
+                    <Award className="w-3.5 h-3.5" />
+                    <span>Outright First-Round Victory Projected</span>
+                  </div>
+                  <h3 className="text-base font-bold text-emerald-950 mt-0.5">
+                    {result.projectedWinner} Wins 2027 Election
                   </h3>
                   <p className="text-xs text-emerald-800 mt-1 font-sans">
-                    {result.projectedWinner} meets both constitutional criteria: simple nationwide plurality AND &gt;25% in at least 24 states + FCT.
+                    Meets both constitutional criteria: simple nationwide plurality AND &gt;25% in at least 24 states + FCT.
                   </p>
                 </div>
               </div>
             ) : (
-              <div className="p-4 bg-amber-50 border border-amber-200 rounded-lg flex items-start gap-3">
-                <Scale className="w-5 h-5 text-amber-600 shrink-0 mt-0.5" />
+              <div className="p-4 bg-amber-50 border border-amber-200 rounded-lg flex items-start gap-3.5">
+                <div className="flex -space-x-2 shrink-0">
+                  {result.runOffCandidates?.map((candName) => {
+                    const candObj = CANDIDATES.find(c => candName.includes(c.name) || candName.includes(c.party));
+                    return candObj ? (
+                      <img
+                        key={candObj.id}
+                        src={candObj.imageUrl}
+                        alt={candObj.name}
+                        referrerPolicy="no-referrer"
+                        className="w-11 h-11 rounded-xl object-cover object-top border-2 border-amber-500 shadow-sm"
+                      />
+                    ) : null;
+                  })}
+                </div>
                 <div>
-                  <h3 className="text-base font-bold text-amber-900">
-                    Mandatory Constitutional Run-Off Projected
+                  <div className="flex items-center gap-1.5 text-xs font-mono font-bold text-amber-800 uppercase">
+                    <Scale className="w-3.5 h-3.5" />
+                    <span>Mandatory Constitutional Run-Off Projected</span>
+                  </div>
+                  <h3 className="text-base font-bold text-amber-950 mt-0.5">
+                    Run-Off Triggered
                   </h3>
                   <p className="text-xs text-amber-800 mt-1 font-sans">
                     No candidate simultaneously met the 25% threshold across 24 states and national plurality. 
-                    Run-off triggered between <strong className="text-slate-900">{result.runOffCandidates?.[0]}</strong> and <strong className="text-slate-900">{result.runOffCandidates?.[1]}</strong>.
+                    Run-off contest between <strong className="text-slate-900">{result.runOffCandidates?.[0]}</strong> and <strong className="text-slate-900">{result.runOffCandidates?.[1]}</strong>.
                   </p>
                 </div>
               </div>
@@ -275,49 +313,64 @@ export const ForecasterView: React.FC = () => {
                 Simulated Candidate Vote Shares:
               </span>
 
-              {result.candidateResults.map((cand) => (
-                <div key={cand.id} className="p-3 bg-slate-50 border border-slate-200 rounded-lg font-mono text-xs">
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-2">
-                      <span
-                        className="w-2.5 h-2.5 rounded-full"
-                        style={{ backgroundColor: cand.color }}
-                      ></span>
-                      <span className="font-bold text-slate-900 text-sm">{cand.name}</span>
-                      <span className="text-slate-500">({cand.party})</span>
+              {result.candidateResults.map((cand) => {
+                const candObj = CANDIDATES.find(c => c.id === cand.id);
+                return (
+                  <div key={cand.id} className="p-3.5 bg-slate-50 border border-slate-200 rounded-xl font-mono text-xs hover:border-slate-300 transition-colors">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-2.5">
+                        {candObj && (
+                          <img
+                            src={candObj.imageUrl}
+                            alt={cand.name}
+                            referrerPolicy="no-referrer"
+                            className="w-8 h-8 rounded-lg object-cover object-top border shadow-2xs"
+                            style={{ borderColor: cand.color }}
+                          />
+                        )}
+                        <div>
+                          <div className="flex items-center gap-1.5">
+                            <span className="font-bold text-slate-900 text-sm">{cand.name}</span>
+                            <span className="text-slate-500 font-medium">({cand.party})</span>
+                          </div>
+                          <span className="text-[10px] text-slate-500 block font-sans">
+                            {cand.party === 'NDC' ? 'Opposition Coalition' : cand.party === 'APC' ? 'Incumbent Ruling Party' : 'Northern Alliance'}
+                          </span>
+                        </div>
+                      </div>
+
+                      <div className="text-right">
+                        <span className="text-lg font-extrabold text-slate-900 tabular-nums">
+                          {cand.projectedVoteShare}%
+                        </span>
+                        <span className="text-[11px] text-slate-500 block">
+                          {cand.projectedTotalVotesMillion}M votes
+                        </span>
+                      </div>
                     </div>
 
-                    <div className="text-right">
-                      <span className="text-base font-bold text-slate-900 tabular-nums">
-                        {cand.projectedVoteShare}%
+                    {/* Bar */}
+                    <div className="h-2 w-full bg-slate-200 rounded-full mt-3 overflow-hidden">
+                      <div
+                        className="h-full rounded-full transition-all duration-300"
+                        style={{
+                          width: `${Math.min(100, cand.projectedVoteShare)}%`,
+                          backgroundColor: cand.color,
+                        }}
+                      ></div>
+                    </div>
+
+                    <div className="flex items-center justify-between text-[11px] text-slate-500 mt-2 pt-1 border-t border-slate-200/60">
+                      <span>
+                        25% Threshold in States: <strong className="text-slate-900">{cand.statesMeeting25PercentThreshold}</strong> / 37
                       </span>
-                      <span className="text-[11px] text-slate-500 block">
-                        {cand.projectedTotalVotesMillion}M votes
+                      <span className={cand.statesMeeting25PercentThreshold >= 24 ? 'text-emerald-700 font-bold' : 'text-slate-500 font-medium'}>
+                        {cand.statesMeeting25PercentThreshold >= 24 ? 'Passed (≥24 states)' : 'Short of 24 states'}
                       </span>
                     </div>
                   </div>
-
-                  {/* Bar */}
-                  <div className="h-1.5 w-full bg-slate-200 rounded-full mt-2.5 overflow-hidden">
-                    <div
-                      className="h-full rounded-full transition-all duration-300"
-                      style={{
-                        width: `${Math.min(100, cand.projectedVoteShare)}%`,
-                        backgroundColor: cand.color,
-                      }}
-                    ></div>
-                  </div>
-
-                  <div className="flex items-center justify-between text-[11px] text-slate-500 mt-2">
-                    <span>
-                      25% Threshold in States: <strong className="text-slate-900">{cand.statesMeeting25PercentThreshold}</strong> / 37
-                    </span>
-                    <span className={cand.statesMeeting25PercentThreshold >= 24 ? 'text-emerald-700 font-semibold' : 'text-slate-500'}>
-                      {cand.statesMeeting25PercentThreshold >= 24 ? 'Passed (≥24)' : 'Short of 24 states'}
-                    </span>
-                  </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
 
             {/* Dynamic Notes from Simulator */}
