@@ -11,12 +11,14 @@ import { AddPostModal } from './components/AddPostModal';
 import { BriefingModal } from './components/BriefingModal';
 import { CandidateModal } from './components/CandidateModal';
 import { SimulateRaceModal } from './components/SimulateRaceModal';
+import { EnterpriseRateCardModal } from './components/EnterpriseRateCardModal';
 import { CandidateId, SocialPost } from './types/election';
 
 export default function App() {
   const [activeTab, setActiveTab] = useState('overview');
   const [isSimulateModalOpen, setIsSimulateModalOpen] = useState(false);
   const [isBriefingModalOpen, setIsBriefingModalOpen] = useState(false);
+  const [isRateCardModalOpen, setIsRateCardModalOpen] = useState(false);
   const [isAddPostModalOpen, setIsAddPostModalOpen] = useState(false);
   const [selectedCandidateId, setSelectedCandidateId] = useState<CandidateId | null>(null);
 
@@ -36,6 +38,7 @@ export default function App() {
         setActiveTab={setActiveTab}
         onOpenSimulate={handleOpenSimulate}
         onOpenBriefing={() => setIsBriefingModalOpen(true)}
+        onOpenRateCard={() => setIsRateCardModalOpen(true)}
       />
 
       {/* Main Content Area */}
@@ -48,6 +51,7 @@ export default function App() {
           <OverviewView
             onSelectCandidate={handleSelectCandidate}
             onNavigateTab={setActiveTab}
+            onOpenRateCard={() => setIsRateCardModalOpen(true)}
           />
         )}
 
@@ -97,6 +101,12 @@ export default function App() {
       <BriefingModal
         isOpen={isBriefingModalOpen}
         onClose={() => setIsBriefingModalOpen(false)}
+        onOpenRateCard={() => setIsRateCardModalOpen(true)}
+      />
+
+      <EnterpriseRateCardModal
+        isOpen={isRateCardModalOpen}
+        onClose={() => setIsRateCardModalOpen(false)}
       />
 
       <CandidateModal

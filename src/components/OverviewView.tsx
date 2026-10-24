@@ -1,16 +1,18 @@
 import React, { useState } from 'react';
 import { CANDIDATES, GEOPOLITICAL_ZONES, ECONOMIC_ISSUES, HERO_BANNER_URL } from '../data/electionData';
 import { Candidate, CandidateId } from '../types/election';
-import { ArrowUpRight, ArrowDownRight, Fuel, MapPin, Users, Activity, ExternalLink, BarChart3, Radio, Sparkles, Sliders } from 'lucide-react';
+import { ArrowUpRight, ArrowDownRight, Fuel, MapPin, Users, Activity, ExternalLink, BarChart3, Radio, Sparkles, Sliders, FileText, Mail, ShieldCheck } from 'lucide-react';
 
 interface OverviewViewProps {
   onSelectCandidate: (candidateId: CandidateId) => void;
   onNavigateTab: (tab: string) => void;
+  onOpenRateCard?: () => void;
 }
 
 export const OverviewView: React.FC<OverviewViewProps> = ({
   onSelectCandidate,
   onNavigateTab,
+  onOpenRateCard,
 }) => {
   const [activeGeoFilter, setActiveGeoFilter] = useState<'all' | 'urban' | 'rural'>('all');
 
@@ -519,6 +521,48 @@ export const OverviewView: React.FC<OverviewViewProps> = ({
               </div>
             );
           })}
+        </div>
+      </div>
+
+      {/* Enterprise Commercial Advisory & Rate Card Callout */}
+      <div className="rounded-xl border border-emerald-900/30 bg-gradient-to-br from-slate-900 via-slate-900 to-emerald-950 p-6 text-white shadow-xl flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+        <div className="space-y-1.5 max-w-2xl">
+          <div className="inline-flex items-center gap-2 px-2.5 py-0.5 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-400/30 text-[11px] font-mono font-semibold">
+            <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
+            <span>ENTERPRISE ADVISORY & WAR ROOM INTELLIGENCE</span>
+          </div>
+          <h3 className="text-lg sm:text-xl font-bold tracking-tight text-white">
+            Looking for Custom 774-LGA Polling or War Room Retainer?
+          </h3>
+          <p className="text-xs text-slate-300 leading-relaxed">
+            Access dedicated polling sweeps, high-frequency Pidgin NLP feeds, and Section 134(2) constitutional scenario modelling. View our official commercial rate card and 1-page executive PDF briefing.
+          </p>
+          <div className="text-[11px] font-mono text-slate-400 pt-1 flex flex-wrap items-center gap-3">
+            <span>Lead Contact: <strong className="text-white">Moses Akaaza</strong></span>
+            <span>•</span>
+            <span className="text-emerald-400 font-semibold">mosesakaaza@gmail.com</span>
+            <span>•</span>
+            <span>Abuja & Lagos, Nigeria</span>
+          </div>
+        </div>
+
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full md:w-auto shrink-0">
+          {onOpenRateCard && (
+            <button
+              onClick={onOpenRateCard}
+              className="px-4 py-2.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs flex items-center justify-center gap-2 transition-colors shadow-sm font-mono cursor-pointer"
+            >
+              <FileText className="w-4 h-4" />
+              <span>View Rate Card (PDF)</span>
+            </button>
+          )}
+          <a
+            href="mailto:mosesakaaza@gmail.com?subject=Enterprise%20NaijaPulse%202027%20Intelligence%20Engagement%20RFP"
+            className="px-4 py-2.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 font-semibold text-xs flex items-center justify-center gap-2 transition-colors font-mono"
+          >
+            <Mail className="w-4 h-4 text-emerald-400" />
+            <span>Contact War Room Desk</span>
+          </a>
         </div>
       </div>
     </div>

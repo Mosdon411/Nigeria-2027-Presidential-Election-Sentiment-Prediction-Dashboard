@@ -5,9 +5,14 @@ import { CANDIDATES, POLL_SOURCES, ECONOMIC_ISSUES } from '../data/electionData'
 interface BriefingModalProps {
   isOpen: boolean;
   onClose: () => void;
+  onOpenRateCard?: () => void;
 }
 
-export const BriefingModal: React.FC<BriefingModalProps> = ({ isOpen, onClose }) => {
+export const BriefingModal: React.FC<BriefingModalProps> = ({ 
+  isOpen, 
+  onClose,
+  onOpenRateCard 
+}) => {
   if (!isOpen) return null;
 
   const handlePrint = () => {
@@ -73,11 +78,63 @@ export const BriefingModal: React.FC<BriefingModalProps> = ({ isOpen, onClose })
             </p>
           </div>
 
-          <div className="p-3 bg-slate-50 border border-slate-200 rounded text-slate-600">
-            <span className="text-slate-900 font-bold block mb-1">INEC Candidate Slate (Confirmed Sept 11, 2026):</span>
-            <div>· Bola Tinubu (APC, 74) / Kashim Shettima (59)</div>
-            <div>· Atiku Abubakar (ADC, 79) / Rotimi Amaechi (61)</div>
-            <div>· Peter Obi (NDC, 65) / Rabiu Kwankwaso (69)</div>
+          <div className="p-4 bg-slate-50 border border-slate-200 rounded-xl space-y-3">
+            <span className="text-slate-900 font-bold block text-xs uppercase tracking-wider font-mono">
+              INEC Certified Candidate Slate (Confirmed Sept 11, 2026):
+            </span>
+            <div className="grid sm:grid-cols-3 gap-3">
+              {CANDIDATES.map((cand) => (
+                <div
+                  key={cand.id}
+                  className="p-2.5 bg-white border border-slate-200 rounded-lg flex items-center gap-2.5 shadow-2xs"
+                >
+                  <img
+                    src={cand.imageUrl}
+                    alt={cand.name}
+                    referrerPolicy="no-referrer"
+                    className="w-10 h-10 rounded-lg object-cover object-top border shrink-0"
+                    style={{ borderColor: cand.color }}
+                  />
+                  <div className="min-w-0">
+                    <div className="flex items-center gap-1">
+                      <span className="font-bold text-slate-900 truncate text-[11px]">{cand.name}</span>
+                      <span
+                        className="px-1 py-0.2 rounded text-[9px] font-bold text-white shrink-0"
+                        style={{ backgroundColor: cand.color }}
+                      >
+                        {cand.party}
+                      </span>
+                    </div>
+                    <div className="text-[10px] text-slate-500 truncate mt-0.5">
+                      VP: {cand.runningMate}
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+            <div className="pt-2 border-t border-slate-200/60 text-[10px] text-slate-500 flex flex-wrap items-center justify-between gap-2">
+              <span>Verified with INEC Form EC8B filings</span>
+              <div className="flex items-center gap-3">
+                {onOpenRateCard && (
+                  <button
+                    type="button"
+                    onClick={() => {
+                      onClose();
+                      onOpenRateCard();
+                    }}
+                    className="text-emerald-700 hover:text-emerald-800 font-bold hover:underline flex items-center gap-1 cursor-pointer"
+                  >
+                    <span>View Enterprise Rate Card (PDF) →</span>
+                  </button>
+                )}
+                <a
+                  href="mailto:mosesakaaza@gmail.com?subject=Enterprise%20Election%20Intel%20Briefing%20Inquiry"
+                  className="text-slate-700 hover:underline font-semibold"
+                >
+                  Contact Moses Akaaza →
+                </a>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -85,6 +142,17 @@ export const BriefingModal: React.FC<BriefingModalProps> = ({ isOpen, onClose })
         <div className="p-4 border-t border-slate-200 flex items-center justify-between text-xs font-mono">
           <span className="text-slate-500">Classification: Unrestricted Strategic Brief</span>
           <div className="flex items-center gap-2">
+            {onOpenRateCard && (
+              <button
+                onClick={() => {
+                  onClose();
+                  onOpenRateCard();
+                }}
+                className="px-3.5 py-1.5 rounded bg-emerald-50 hover:bg-emerald-100 border border-emerald-300 text-emerald-800 flex items-center gap-1.5 transition-colors font-semibold"
+              >
+                <span>Enterprise Rate Card</span>
+              </button>
+            )}
             <button
               onClick={handlePrint}
               className="px-3.5 py-1.5 rounded bg-slate-100 hover:bg-slate-200 border border-slate-300 text-slate-700 flex items-center gap-1.5 transition-colors font-medium"

@@ -9,4 +9,57 @@ body {
   font-family: var(--font-sans);
   background-color: #ffffff;
   color: #0f172a;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Strict Executive 1-Page A4 Print Configuration */
+@media print {
+  @page {
+    size: A4 portrait;
+    margin: 6mm 8mm;
+  }
+
+  html, body {
+    background: #ffffff !important;
+    color: #0f172a !important;
+    font-size: 10.5px !important;
+    line-height: 1.25 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  /* Hide regular app elements in print mode */
+  header,
+  footer,
+  main,
+  .no-print {
+    display: none !important;
+  }
+
+  /* Display target print container seamlessly */
+  #enterprise-rate-card-print-target {
+    visibility: visible !important;
+    display: flex !important;
+    position: absolute !important;
+    left: 0 !important;
+    top: 0 !important;
+    width: 100% !important;
+    min-height: 282mm !important;
+    max-height: 285mm !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    border: none !important;
+    box-shadow: none !important;
+    page-break-after: avoid !important;
+    break-after: avoid !important;
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+    overflow: hidden !important;
+  }
+
+  #enterprise-rate-card-print-target * {
+    visibility: visible !important;
+  }
 }
